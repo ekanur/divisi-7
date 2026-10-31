@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIVISI 7 : Markas Investigasi Paket — Media Pembelajaran OSI Layer</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-active-scene="1">
+  <!-- Fullscreen Background Canvas (Scene 1: Ruang Kerja Detektif dengan Sorot Lampu Gantung Berayun) -->
+  <canvas id="bg3dCanvas" aria-hidden="true"></canvas>
+
+  <!-- ========================================================================
+       CONSISTENT TOP GAME HUD & NAVIGATION BAR (ALL 5 SCENES)
+       Logo DIVISI 7 : Markas Investigasi Paket selalu tampil utuh & jelas
+       ======================================================================== -->
+  <header class="top-game-bar">
+    <!-- Top-Left Logo & Title Banner (Tidak Terpotong) -->
+    <div class="sb-title-banner">
+      <div class="sb-shield-icon">7</div>
+      <div class="sb-logo-text-group">
+        <div class="sb-logo-main">DIVISI 7 : Markas Investigasi Paket</div>
+      </div>
+    </div>
+
+    <!-- Top-Center Consistent Scene Navigation Buttons -->
+    <nav class="top-nav-cluster" aria-label="Navigasi Utama Antar Scene">
+      <button type="button" class="nav-scene-btn" data-scene="2">Lab X-Ray</button>
+      <button type="button" class="nav-scene-btn" data-scene="3">Ujian</button>
+      <button type="button" class="nav-scene-btn" data-scene="4" disabled>Investigasi</button>
+    </nav>
+
+    <!-- Top-Right Status Box & Utility Buttons -->
+    <div class="top-status-cluster">
+      <div class="sb-status-box">
+        Halo Detektif <strong id="hudAgentRank">K7X9</strong>
+        <span class="hud-score-level-part">
+          &nbsp;|&nbsp; Skor: <strong id="hudScoreVal">100 Poin</strong> &nbsp;|&nbsp; Level: <strong id="hudLevelVal">Mudah</strong>
+        </span>
+      </div>
+      <button type="button" class="util-icon-btn" id="btnOpenGuide" title="Buku Saku 7 OSI Layer">📖 OSI</button>
+      <button type="button" class="util-icon-btn" id="btnToggleMute" title="Suara">🔊 ON</button>
+      <button type="button" class="util-icon-btn" id="btnOpenTeacher" title="Pintasan Mode Guru (PIN: 7777)">🔑 Guru</button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       FULLSCREEN 16:9 GAME STAGE
+       ======================================================================== -->
+  <main class="game-viewport">
+
+    <!-- ======================================================================
+         SCENE 1: REGISTRASI DETEKTIF DIVISI 7
+         ====================================================================== -->
+    <section class="scene-stage active" data-scene-view="1" aria-label="Scene 1 Registrasi">
+      <!-- Right: Panel Rekrutmen Detektif -->
+      <div class="scifi-window s1-reg-window">
+        <div class="s1-reg-inner">
+          <h1 class="s1-reg-heading">REKRUTMEN DETEKTIF<br />DIVISI 7</h1>
+
+          <div class="sb-field-group">
+            <label class="sb-label" for="inputStudentName">Nama</label>
+            <input
+              type="text"
+              id="inputStudentName"
+              class="sb-input"
+              placeholder="Masukkan nama"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="sb-field-group">
+            <span class="sb-label">Kode Agen Rahasia</span>
+            <div class="callsign-tiles-wrap">
+              <div class="callsign-tile" id="codeTile0">K</div>
+              <div class="callsign-tile" id="codeTile1">7</div>
+              <div class="callsign-tile" id="codeTile2">X</div>
+              <div class="callsign-tile" id="codeTile3">9</div>
+              <button type="button" class="reroll-mini-btn" id="btnRerollCallsign" title="Pilih Kode Agen Rahasia">🎲</button>
+            </div>
+          </div>
+
+          <button type="button" class="sb-cyan-cta" id="btnStartAcademy">
+            MULAI
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 2: LAB VISUALISASI X-RAY OSI LAYER (Nuansa Santai)
+         ====================================================================== -->
+    <section class="scene-stage" data-scene-view="2" aria-label="Scene 2 Lab Visualisasi X-Ray">
+      <div class="s2-layout">
+        <!-- Left Window: Representasi Proses OSI-Layer + Animasi Koneksi Layer 1 -->
+        <div class="scifi-window">
+          <div class="scifi-win-bar">
+            <span id="labVisitedCount">Representasi Proses OSI-Layer</span>
+            <div class="win-controls">
+              <span>_</span>
+              <span class="win-ctrl-box">□</span>
+              <span class="win-ctrl-box">×</span>
+            </div>
+          </div>
+
+          <div class="dual-stack-grid">
+            <div>
+              <div class="stack-col-header">
+                Pengirim (Sender)
+                <span class="stack-order-badge sender-order">↓ Layer 7 → Layer 1</span>
+              </div>
+              <div id="senderStackColumn"></div>
+            </div>
+            <div>
+              <div class="stack-col-header" style="font-size:0.65rem;color:var(--cyan-bright);">Alur<br />Urutan</div>
+              <div id="middleLayerLabelsColumn"></div>
+            </div>
+            <div>
+              <div class="stack-col-header">
+                Penerima (Receiver)
+                <span class="stack-order-badge receiver-order">↑ Layer 1 → Layer 7</span>
+              </div>
+              <div id="receiverStackColumn"></div>
+            </div>
+          </div>
+
+          <!-- Animasi Penghubung Layer 1 (Sender) ke Layer 1 (Receiver) di atas Agen FG -->
+          <div style="display:flex;align-items:flex-start;justify-content:center;padding:0.1rem 0.4rem 0.25rem;">
+            <canvas id="cableLoopCanvas" width="400" height="74" style="width:100%;height:70px;"></canvas>
+          </div>
+        </div>
+
+        <!-- Right Window: Forensic X-Ray Packet Scanner -->
+        <div class="scifi-window gold-window">
+          <div class="scifi-win-bar">
+            <span>forensic X-Ray packet scanner</span>
+            <div style="display:flex;gap:0.45rem;align-items:center;">
+              <select id="selectLabScenario" class="xray-scenario-select" aria-label="Pilih Kasus">
+                <option value="chat">Kasus: Chat (TCP)</option>
+                <option value="udp">Kasus: Video Call (UDP)</option>
+              </select>
+              <div class="win-controls" style="margin-left:0.2rem;">
+                <span>_</span>
+                <span class="win-ctrl-box">□</span>
+                <span class="win-ctrl-box">×</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="xray-SubBar">
+            <span class="win-ctrl-box" style="color:var(--cyan);">×</span>
+            <div class="xray-progress-track">
+              <div class="xray-progress-fill" id="xrayScannerBarFill"></div>
+            </div>
+            <div style="display:flex;gap:0.75rem;font-family:var(--font-mono);font-size:0.68rem;color:var(--cyan-bright);">
+              <span><strong id="xrayProtoLabel">TCP</strong><br /><small style="color:var(--text-muted);">PROTO</small></span>
+              <span><strong id="xrayPduLabel">SEGMENT</strong><br /><small style="color:var(--text-muted);">PDU</small></span>
+              <span><strong>TELEMETRY</strong><br /><small style="color:var(--green);">ONLINE</small></span>
+            </div>
+          </div>
+
+          <div class="xray-body-grid">
+            <div>
+              <div id="xrayProcessHeaderTitle" style="font-size:0.8rem;font-weight:800;color:#ffffff;margin-bottom:0.35rem;">
+                TCP 3-Way Handshake ('SYN', 'SYN-ACK', 'ACK')
+              </div>
+
+              <div class="handshake-diagram-box" id="xrayTechnicalDiagramBox"></div>
+
+              <div class="xray-info-pill" id="xrayHighlightPill">Port 443 HTTPS</div>
+
+              <div class="xray-ip-card">
+                <div style="font-weight:700;color:#ffffff;" id="xrayBox1Title">Source</div>
+                <div style="color:#cbd5e1;font-family:var(--font-mono);" id="xrayBox1Val">IP Address: 192.168.1.10</div>
+              </div>
+
+              <div class="xray-ip-card">
+                <div style="font-weight:700;color:#ffffff;" id="xrayBox2Title">Destination</div>
+                <div style="color:#cbd5e1;font-family:var(--font-mono);" id="xrayBox2Val">IP Address: 203.0.113.50</div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <canvas id="xrayCapsuleCanvas" width="350" height="230" style="width:100%;max-width:350px;height:220px;border:1px solid rgba(0,229,255,0.3);background:rgba(2,10,22,0.85);"></canvas>
+              <div style="display:flex;justify-content:space-between;width:100%;font-family:var(--font-mono);font-size:0.64rem;color:var(--cyan-bright);margin-top:0.2rem;padding:0 0.25rem;">
+                <span>100</span><span>700</span><span>1300</span><span>1900</span><span>2500</span><span>3100</span><span>3700</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 3: UJIAN KADET — PUZZLE RAKIT & BONGKAR PAKET (Nuansa Menegangkan)
+         ====================================================================== -->
+    <section class="scene-stage" data-scene-view="3" aria-label="Scene 3 Ujian Kadet">
+      <div class="s3-status-banner">
+        <div style="font-size:0.98rem;font-weight:800;letter-spacing:0.04em;">
+          STATUS: <span style="color:var(--cyan-bright);">UJIAN KENAIKAN TINGKAT</span>
+        </div>
+        <div class="s3-center-medal">🛡️</div>
+        <div style="font-size:0.9rem;font-weight:800;">
+          TARGET LULUS: <span style="color:var(--gold);">80%</span> &nbsp;|&nbsp;
+          SKOR SAAT INI: <span style="color:var(--gold);" id="examLiveScoreText">0%</span>
+        </div>
+      </div>
+
+      <div class="s3-arena">
+        <div class="motherboard-rack" id="examRackContainer"></div>
+        <div class="s3-action-cluster">
+          <button type="button" class="s3-action-btn s3-btn-reset" id="btnResetExam">
+            🎲 ACAK SOAL
+          </button>
+          <button type="button" class="s3-action-btn s3-btn-check" id="btnCheckExam">
+            🔍 PERIKSA JAWABAN
+          </button>
+          <button type="button" class="s3-action-btn s3-btn-investigate" id="btnExamToInvestigation" style="display:none;">
+            🏆 LANJUT KE INVESTIGASI ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 4: MEJA INVESTIGASI KASUS (Nuansa Menegangkan)
+         ====================================================================== -->
+    <section class="scene-stage" data-scene-view="4" aria-label="Scene 4 Meja Investigasi Kasus">
+      <div class="s4-three-windows">
+        <div>
+          <div class="scifi-window">
+            <div class="scifi-win-bar">
+              <span>The Dossier</span>
+              <div style="display:flex;gap:0.25rem;" id="caseSelectorTabs"></div>
+            </div>
+            <div style="padding:0.6rem;">
+              <img src="assets/sprites/dossier_k01.png" alt="Berkas Kasus K-01" class="dossier-card-img" />
+              <div style="background:rgba(4,14,28,0.9);border:1px solid rgba(0,229,255,0.35);border-radius:6px;padding:0.45rem 0.65rem;">
+                <div style="font-size:0.76rem;font-weight:800;color:var(--gold);margin-bottom:0.15rem;" id="caseTitleDisplay">
+                  KASUS K-01: MISTERI KOMPUTER BISU
+                </div>
+                <p style="font-size:0.71rem;line-height:1.38;color:#e2e8f0;" id="caseVictimReport"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="radio-hint-panel" id="btnUseHint" role="button" tabindex="0">
+            <div class="walkie-icon-box">📻</div>
+            <div>
+              <div style="font-size:0.82rem;font-weight:800;color:#ffffff;">Kontak Radio Agen FG</div>
+              <div style="font-size:0.72rem;color:var(--cyan-bright);">(Hint -15 Poin) — Klik untuk Petunjuk</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scifi-window">
+          <div class="scifi-win-bar">
+            <span>The OSI Diagnostic Scanner</span>
+            <div class="win-controls">
+              <span>_</span>
+              <span class="win-ctrl-box">□</span>
+              <span class="win-ctrl-box">×</span>
+            </div>
+          </div>
+          <div style="padding:0.6rem 0.85rem;">
+            <div style="text-align:center;font-size:0.86rem;font-weight:700;color:#ffffff;margin-bottom:0.4rem;">
+              OSI 7-Layer Model
+            </div>
+
+            <div id="scannerLayersList"></div>
+
+            <div class="red-alert-popup" id="scannerAlertBox">
+              <div style="font-size:0.74rem;font-weight:800;color:#fca5a5;margin-bottom:0.2rem;" id="scannerAlertTitle">
+                KLIK TIAP LAYER DI ATAS UNTUK MEMINDAI PAKET
+              </div>
+              <div style="font-family:var(--font-mono);font-size:0.7rem;color:#ffffff;margin-bottom:0.35rem;" id="scannerAlertDesc">
+                Temukan layer yang menjadi sumber masalah jaringan pada kasus ini.
+              </div>
+              <button type="button" class="nav-arrow-btn" style="background:rgba(239,68,68,0.3);border-color:#f87171;color:#ffffff;width:100%;" id="btnFlagSelectedLayer" disabled>
+                🚨 TANDAI LAYER INI BERMASALAH
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="scifi-window">
+          <div class="scifi-win-bar">
+            <span>The Mini-Puzzle</span>
+            <div class="win-controls">
+              <span>_</span>
+              <span class="win-ctrl-box">□</span>
+              <span class="win-ctrl-box">×</span>
+            </div>
+          </div>
+          <div style="padding:0.65rem;">
+            <div class="rj45-visual-stage">
+              <img src="assets/sprites/rj45_switch.png" alt="Konektor RJ45 dan Port Switch" />
+              <div class="rj45-bits-overlay" id="rj45BitsOverlay">00000000</div>
+            </div>
+
+            <div id="miniPuzzleContainer"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 5: UPACARA PELANTIKAN DETEKTIF (Kemenangan jika lulus / Santai jika belum)
+         ====================================================================== -->
+    <section class="scene-stage" data-scene-view="5" aria-label="Scene 5 Upacara Pelantikan Detektif">
+      <div class="s5-cert-wrapper">
+        <div class="s5-cert-frame">
+          <img src="assets/sprites/badge_divisi7_gold.png" alt="Lencana Emas Divisi 7" class="s5-top-badge" />
+
+          <div style="font-family:Georgia, serif;font-size:1.45rem;font-weight:700;color:var(--cyan-bright);text-shadow:0 0 12px rgba(0,229,255,0.45);margin-bottom:0.4rem;">
+            Digital Certificate of Honor
+          </div>
+
+          <div style="font-size:1.45rem;font-weight:900;color:var(--gold);letter-spacing:0.04em;line-height:1.25;">
+            <span id="certTitleStatus">DETEKTIF LEGENDARIS DIVISI 7</span><br />
+            — <span id="certCallsignBadge">AGEN K7X9</span>
+          </div>
+
+          <div style="font-size:1rem;font-weight:700;color:#ffffff;margin:0.4rem 0;">
+            <span id="certStudentName">Nama Kadet</span> &nbsp;•&nbsp; <span id="certStudentClass" style="color:var(--cyan-bright);">X TKJ 1</span>
+          </div>
+
+          <div style="font-size:0.86rem;color:#e2e8f0;line-height:1.55;margin:0.4rem 0 0.7rem;">
+            Penguasaan 7 Lapisan OSI: <strong style="color:var(--gold);" id="certExamScore">100% Complete</strong><br />
+            Nilai Akhir: <strong style="color:var(--gold);" id="certCaseScore">100 / 100</strong>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:0.35rem;">
+            <div style="width:58px;height:58px;border-radius:50%;background:radial-gradient(circle,#fde047,#a16207);border:2px solid #fef08a;display:grid;place-items:center;font-size:1.45rem;box-shadow:0 0 18px rgba(250,204,21,0.6);">
+              🎖️
+            </div>
+            <div style="border:2px solid var(--cyan);border-radius:50%;width:66px;height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.55rem;color:var(--cyan-bright);">
+              <span>OFFICIAL SEAL</span>
+              <strong style="font-size:0.98rem;color:#ffffff;">7</strong>
+              <span>DIVISI 7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="no-print" style="display:flex;justify-content:center;gap:0.75rem;align-items:center;">
+          <button type="button" class="s5-print-btn" id="btnPrintCert">
+            CETAK SERTIFIKAT (PDF)
+          </button>
+          <button type="button" class="nav-arrow-btn" style="margin-top:0.8rem;padding:0.65rem 1rem;" id="btnResetNewStudent">
+            🔄 Kadet Baru
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CONSISTENT AGEN FG DOCK (SELALU DI POSISI KIRI BAWAH YANG SAMA DI TIAP SCENE!)
+         Klik pada Agen FG atau kotak dialog untuk membacakan ulang teks
+         ====================================================================== -->
+    <aside class="consistent-fg-dock" aria-label="Karakter Pemandu Agen FG">
+      <div
+        class="fg-character-trigger"
+        id="consistentFgCharacter"
+        role="button"
+        tabindex="0"
+        title="Agen FG"
+      >
+        <img
+          src="assets/sprites/fg_stand.png"
+          alt="Agen FG"
+          class="fg-character-img"
+          id="consistentFgImg"
+        />
+      </div>
+
+      <div class="sb-dialog-container" id="agenFgDialogBox" title="Agen FG">
+        <div class="sb-dialog-header-row">
+          <div class="sb-dialog-tab">
+            <span>Agen FG</span>
+          </div>
+        </div>
+        <div class="sb-dialog-body">
+          <p class="sb-dialog-text" id="mentorSpeechText">
+            Selamat datang di Divisi 7, markas agen rahasia kasus di jaringan komputer.
+          </p>
+          <button type="button" class="sb-dialog-play-btn" id="btnPlayFgVoice" aria-label="Putar Suara">▶</button>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- MODAL 1: BUKU SAKU 7 OSI LAYER -->
+  <dialog id="dialogGuide" class="cyber-dialog" closedby="any" aria-labelledby="dialogGuideTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+      <h3 id="dialogGuideTitle" style="color:var(--cyan-bright);font-size:0.95rem;">📖 BUKU SAKU AGEN DIVISI 7: 7 OSI LAYER</h3>
+      <form method="dialog">
+        <button type="submit" class="util-icon-btn">✕ Tutup</button>
+      </form>
+    </div>
+    <table class="header-anatomy-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>PDU</th>
+          <th>Proses Teknis & Informasi Header Utama</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>L7 Application</strong></td><td>Data</td><td>HTTP Request (GET/POST), DNS, antarmuka aplikasi.</td></tr>
+        <tr><td><strong>L6 Presentation</strong></td><td>Data</td><td>Translasi karakter UTF-8, Kompresi GZIP, Enkripsi SSL/TLS.</td></tr>
+        <tr><td><strong>L5 Session</strong></td><td>Data</td><td>Pembukaan sesi komunikasi, Session ID & Sync Checkpoint.</td></tr>
+        <tr><td><strong>L4 Transport</strong></td><td>Segment</td><td>Pemecahan data, Port (443/80), TCP 3-Way Handshake (SYN/ACK).</td></tr>
+        <tr><td><strong>L3 Network</strong></td><td>Packet</td><td>Pengalamatan logis Source & Dest IP Address, Routing & Gateway.</td></tr>
+        <tr><td><strong>L2 Data Link</strong></td><td>Frame</td><td>Pengalamatan fisik MAC Address (ARP), Switch, Trailer FCS/CRC.</td></tr>
+        <tr><td><strong>L1 Physical</strong></td><td>Bits</td><td>Deretan biner 101010, sinyal listrik kabel UTP RJ45, Fiber, Wi-Fi.</td></tr>
+      </tbody>
+    </table>
+  </dialog>
+
+  <!-- MODAL 2: MODE GURU / INSTRUKTUR -->
+  <dialog id="dialogTeacher" class="cyber-dialog" closedby="any" aria-labelledby="dialogTeacherTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+      <h3 id="dialogTeacherTitle" style="color:var(--gold);font-size:0.95rem;">🔑 AKSES MODE GURU / INSTRUKTUR</h3>
+      <form method="dialog">
+        <button type="submit" class="util-icon-btn">✕ Tutup</button>
+      </form>
+    </div>
+    <p style="font-size:0.82rem;color:#cbd5e1;margin-bottom:0.75rem;">
+      Masukkan PIN Instruktur (Default: <strong>7777</strong>) untuk membuka seluruh 5 Scene di bar navigasi atas secara langsung:
+    </p>
+    <input type="password" id="inputTeacherPin" class="sb-input" value="7777" style="margin-bottom:0.85rem;" />
+    <div style="display:flex;justify-content:flex-end;">
+      <button type="button" class="nav-arrow-btn" id="btnUnlockTeacher" style="padding:0.5rem 1rem;">🔓 Buka Kunci Semua Scene</button>
+    </div>
+  </dialog>
+
+  <script src="audio.js"></script>
+  <script src="bg3d.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

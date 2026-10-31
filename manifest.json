@@ -1,0 +1,17 @@
+{
+  "name": "DIVISI 7 (Seven-Layer Corps): Markas Investigasi Paket",
+  "short_name": "DIVISI 7 OSI",
+  "description": "Game Edukasi Detektif Siber Interaktif untuk Memahami Proses Teknis 7 OSI Layer (SMK Kelas 10 TKJ/RPL/SIJA/PPLG)",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#060b16",
+  "theme_color": "#00e5ff",
+  "icons": [
+    {
+      "src": "assets/storyboard/scene1_registrasi.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

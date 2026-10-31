@@ -1,0 +1,1286 @@
+/* ==========================================================================
+   DIVISI 7 (Seven-Layer Corps): Markas Investigasi Paket
+   1:1 Storyboard-Matched Fullscreen Cyber-Noir Game Stylesheet
+   ========================================================================== */
+
+:root {
+  --bg-dark: #030812;
+  --cyan: #00e5ff;
+  --cyan-bright: #67e8f9;
+  --cyan-dim: rgba(0, 229, 255, 0.25);
+  --cyan-glass: rgba(6, 22, 43, 0.86);
+  --gold: #facc15;
+  --gold-dim: rgba(250, 204, 21, 0.35);
+  --red: #ef4444;
+  --green: #4ade80;
+  --text-white: #f8fafc;
+  --text-muted: #94a3b8;
+  --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Consolas', 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-ui);
+}
+
+#bg3dCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   CONSISTENT TOP GAME HUD & NAVIGATION BAR (ALL 5 SCENES)
+   Logo DIVISI 7: Markas Investigasi Paket dijamin utuh & tidak pernah terpotong
+   ========================================================================== */
+.top-game-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  min-height: 64px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background: linear-gradient(180deg, rgba(4, 12, 26, 0.98) 0%, rgba(6, 18, 38, 0.9) 100%);
+  border-bottom: 1.5px solid rgba(0, 229, 255, 0.45);
+  box-shadow: 0 4px 24px rgba(0, 229, 255, 0.14);
+}
+
+/* Storyboard Top-Left Angled Title Banner — Never Truncated */
+.sb-title-banner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 1.2rem 0.4rem 0.75rem;
+  background: rgba(6, 20, 40, 0.95);
+  border: 1.5px solid rgba(0, 229, 255, 0.75);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
+  flex-shrink: 0;
+  max-width: none;
+  overflow: visible;
+}
+
+.sb-title-banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48%;
+  height: 3px;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.sb-shield-icon {
+  width: 32px;
+  height: 34px;
+  background: linear-gradient(180deg, #0284c7, #082f49);
+  border: 1.5px solid var(--cyan-bright);
+  clip-path: polygon(50% 0%, 100% 20%, 100% 70%, 50% 100%, 0% 70%, 0% 20%);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--cyan-bright);
+  text-shadow: 0 0 8px var(--cyan);
+  flex-shrink: 0;
+}
+
+.sb-logo-text-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.15;
+}
+
+.sb-logo-main {
+  font-size: 0.92rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.sb-scene-subtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--cyan-bright);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* Consistent Top Scene Navigation Buttons (Locked to Center in all scenes) */
+.top-nav-cluster {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  background: rgba(4, 13, 28, 0.92);
+  padding: 0.26rem 0.45rem;
+  border: 1px solid rgba(0, 229, 255, 0.42);
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.nav-scene-btn {
+  min-width: 84px;
+  text-align: center;
+  padding: 0.32rem 0.6rem;
+  background: rgba(12, 28, 54, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+  white-space: nowrap;
+}
+
+.nav-scene-btn:hover:not(:disabled) {
+  border-color: var(--cyan);
+  color: #ffffff;
+  background: rgba(0, 229, 255, 0.22);
+}
+
+.nav-scene-btn.active {
+  background: linear-gradient(90deg, #0284c7, #00e5ff);
+  color: #020813;
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.55);
+}
+
+.nav-scene-btn.completed {
+  border-color: rgba(74, 222, 128, 0.65);
+  color: var(--green);
+}
+
+.nav-scene-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(0.85);
+}
+
+.nav-arrow-btn {
+  padding: 0.32rem 0.58rem;
+  background: rgba(0, 229, 255, 0.16);
+  border: 1px solid var(--cyan);
+  color: var(--cyan-bright);
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.nav-arrow-btn:hover:not(:disabled) {
+  background: var(--cyan);
+  color: #020813;
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+.nav-arrow-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Top-Right Status Box & Utility Buttons */
+.top-status-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  flex-shrink: 0;
+}
+
+.sb-status-box {
+  padding: 0.34rem 0.7rem;
+  background: rgba(6, 20, 40, 0.92);
+  border: 1px solid rgba(0, 229, 255, 0.5);
+  font-size: 0.74rem;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.sb-status-box strong {
+  color: var(--cyan-bright);
+}
+
+/* Sembunyikan Navigasi Header, Pangkat, Skor, Level, dan Buku Saku pada Scene 1 sesuai permintaan */
+body[data-active-scene="1"] .top-nav-cluster,
+body[data-active-scene="1"] .sb-status-box,
+body[data-active-scene="1"] #btnOpenGuide,
+body[data-active-scene="1"] #btnOpenTeacher {
+  display: none !important;
+}
+
+body[data-active-scene="2"] .hud-score-level-part,
+body[data-active-scene="2"] #btnOpenTeacher,
+body[data-active-scene="3"] .hud-score-level-part,
+body[data-active-scene="3"] #btnOpenGuide,
+body[data-active-scene="3"] #btnOpenTeacher,
+body[data-active-scene="4"] #btnOpenTeacher,
+body[data-active-scene="5"] #btnOpenTeacher {
+  display: none !important;
+}
+
+.util-icon-btn {
+  padding: 0.34rem 0.55rem;
+  background: rgba(8, 25, 48, 0.9);
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  color: var(--cyan-bright);
+  font-size: 0.73rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.util-icon-btn:hover {
+  background: rgba(0, 229, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   FULLSCREEN GAME STAGE & SCI-FI HOLOGRAPHIC WINDOWS
+   ========================================================================== */
+.game-viewport {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 64px);
+  margin-top: 64px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.scene-stage {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0.55rem 1.4rem 175px; /* Ruang bawah agar konten berada di atas Agen FG */
+}
+
+.scene-stage.active {
+  display: block;
+  animation: sceneEnter 0.28s ease-out;
+}
+
+@keyframes sceneEnter {
+  from { opacity: 0; transform: scale(0.988); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Sci-Fi Window Frame with _ □ × Controls */
+.scifi-window {
+  position: relative;
+  background: linear-gradient(180deg, rgba(8, 24, 46, 0.88) 0%, rgba(5, 14, 29, 0.93) 100%);
+  border: 1.5px solid rgba(0, 229, 255, 0.65);
+  border-radius: 6px;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.15), inset 0 0 18px rgba(0, 229, 255, 0.06);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+}
+
+.scifi-window.gold-window {
+  border-color: rgba(250, 204, 21, 0.7);
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.14), inset 0 0 18px rgba(250, 204, 21, 0.05);
+}
+
+.scifi-win-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.32rem 0.7rem;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.35);
+  background: rgba(0, 229, 255, 0.08);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.gold-window .scifi-win-bar {
+  border-bottom-color: rgba(250, 204, 21, 0.4);
+  background: rgba(250, 204, 21, 0.1);
+  color: #fef08a;
+}
+
+.win-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--cyan-bright);
+  opacity: 0.8;
+}
+
+.win-ctrl-box {
+  width: 14px;
+  height: 14px;
+  border: 1px solid currentColor;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   CONSISTENT AGEN FG CHARACTER + DIALOG DOCK (IDENTICAL POSITION IN ALL SCENES!)
+   Klik karakter Agen FG untuk mengulang pembacaan suara teks
+   ========================================================================== */
+.consistent-fg-dock {
+  position: fixed;
+  bottom: 0;
+  left: 18px;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  pointer-events: none;
+}
+
+.fg-character-trigger {
+  position: relative;
+  width: 155px;
+  height: 180px;
+  cursor: pointer;
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: drop-shadow(0 0 18px rgba(0, 229, 255, 0.35));
+}
+
+.fg-character-trigger:hover {
+  transform: translateY(-4px) scale(1.03);
+  filter: drop-shadow(0 0 26px rgba(0, 229, 255, 0.8));
+}
+
+.fg-character-trigger.speaking {
+  animation: fgTalkingPulse 0.9s infinite alternate;
+}
+
+@keyframes fgTalkingPulse {
+  from { filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.45)); transform: translateY(0); }
+  to { filter: drop-shadow(0 0 30px rgba(250, 204, 21, 0.85)); transform: translateY(-3px); }
+}
+
+.fg-character-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.fg-replay-hint-pill {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(4, 15, 30, 0.92);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 0.66rem;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.sb-dialog-container {
+  pointer-events: auto;
+  margin-bottom: 12px;
+  margin-left: -18px;
+  width: min(680px, 58vw);
+  cursor: pointer;
+}
+
+.sb-dialog-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sb-dialog-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.26rem 2.2rem 0.26rem 1rem;
+  background: rgba(8, 33, 58, 0.96);
+  border: 1.5px solid rgba(0, 229, 255, 0.75);
+  border-bottom: none;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 0 100%);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-bottom: -1px;
+}
+
+.sb-dialog-body {
+  position: relative;
+  padding: 0.72rem 1rem 0.72rem 1.1rem;
+  background: rgba(4, 15, 30, 0.95);
+  border: 1.5px solid rgba(0, 229, 255, 0.78);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 229, 255, 0.22);
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.sb-dialog-text {
+  font-size: 0.88rem;
+  line-height: 1.42;
+  color: #f1f5f9;
+  flex: 1;
+}
+
+.sb-dialog-play-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(90deg, #0284c7, #00e5ff);
+  border: 1.5px solid #ffffff;
+  border-radius: 50%;
+  color: #020814;
+  font-size: 0.95rem;
+  font-weight: 900;
+  padding-left: 2px;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sb-dialog-play-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.9);
+}
+
+@keyframes pulseArrow {
+  0%, 100% { transform: translateX(0); opacity: 0.7; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+/* ==========================================================================
+   SCENE 1: REGISTRASI
+   ========================================================================== */
+.s1-globe-wrapper {
+  position: absolute;
+  left: 44%;
+  top: 41%;
+  transform: translate(-50%, -50%);
+  width: min(470px, 38vw);
+  height: min(450px, 68vh);
+  z-index: 15;
+  display: grid;
+  place-items: center;
+}
+
+.s1-reg-window {
+  position: absolute;
+  right: 3%;
+  top: 45%;
+  transform: translateY(-50%);
+  width: min(365px, 29vw);
+  z-index: 30;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+}
+
+.s1-reg-inner {
+  padding: 1.05rem 1.25rem 1.25rem;
+}
+
+.s1-reg-heading {
+  text-align: center;
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin-bottom: 0.85rem;
+  line-height: 1.25;
+}
+
+.sb-field-group {
+  margin-bottom: 0.75rem;
+}
+
+.sb-label {
+  display: block;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  margin-bottom: 0.28rem;
+}
+
+.sb-input {
+  width: 100%;
+  padding: 0.52rem 0.75rem;
+  background: rgba(6, 20, 38, 0.92);
+  border: 1.5px solid rgba(0, 229, 255, 0.6);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  user-select: text;
+}
+
+.sb-input:focus {
+  outline: none;
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+}
+
+.callsign-tiles-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  padding: 0.55rem;
+  background: rgba(4, 12, 24, 0.92);
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  border-radius: 6px;
+  margin-bottom: 0.95rem;
+}
+
+.callsign-tile {
+  width: 40px;
+  height: 44px;
+  background: linear-gradient(180deg, #0c2b4e 0%, #061529 100%);
+  border: 1.5px solid rgba(0, 229, 255, 0.7);
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #e0f2fe;
+  text-shadow: 0 0 10px var(--cyan);
+}
+
+.reroll-mini-btn {
+  padding: 0.4rem 0.5rem;
+  background: rgba(0, 229, 255, 0.16);
+  border: 1px solid var(--cyan);
+  border-radius: 5px;
+  color: var(--cyan-bright);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.sb-cyan-cta {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(90deg, #00d2ff 0%, #00f2fe 100%);
+  border: none;
+  color: #020814;
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.65);
+}
+
+/* ==========================================================================
+   SCENE 2: LAB VISUALISASI X-RAY
+   ========================================================================== */
+.s2-layout {
+  display: grid;
+  grid-template-columns: 37% 61.5%;
+  gap: 1.5%;
+  height: 100%;
+}
+
+.dual-stack-grid {
+  display: grid;
+  grid-template-columns: 1fr 82px 1fr;
+  align-items: center;
+  padding: 0.35rem 0.65rem 0.05rem;
+  gap: 0.3rem;
+}
+
+.stack-col-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.28rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.14rem;
+}
+
+.stack-order-badge {
+  display: inline-block;
+  padding: 0.1rem 0.42rem;
+  border-radius: 999px;
+  font-size: 0.63rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.stack-order-badge.sender-order {
+  background: rgba(0, 229, 255, 0.18);
+  border: 1px solid rgba(0, 229, 255, 0.65);
+  color: var(--cyan-bright);
+  animation: pulseOrderDown 1.8s infinite ease-in-out;
+}
+
+.stack-order-badge.receiver-order {
+  background: rgba(250, 204, 21, 0.18);
+  border: 1px solid rgba(250, 204, 21, 0.65);
+  color: #fef08a;
+  animation: pulseOrderUp 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseOrderDown {
+  0%, 100% { transform: translateY(0); box-shadow: 0 0 6px rgba(0, 229, 255, 0.25); }
+  50% { transform: translateY(2px); box-shadow: 0 0 12px rgba(0, 229, 255, 0.65); }
+}
+
+@keyframes pulseOrderUp {
+  0%, 100% { transform: translateY(0); box-shadow: 0 0 6px rgba(250, 204, 21, 0.25); }
+  50% { transform: translateY(-2px); box-shadow: 0 0 12px rgba(250, 204, 21, 0.65); }
+}
+
+.stack-pill-btn {
+  width: 100%;
+  padding: 0.22rem 0.42rem;
+  margin-bottom: 0.18rem;
+  border-radius: 5px;
+  background: rgba(8, 36, 62, 0.85);
+  border: 1.5px solid rgba(0, 229, 255, 0.65);
+  color: #ffffff;
+  font-size: 0.71rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stack-pill-btn .step-flow-tag {
+  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  padding: 0.04rem 0.28rem;
+  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.2);
+  color: var(--cyan-bright);
+}
+
+.stack-pill-btn.receiver .step-flow-tag {
+  background: rgba(250, 204, 21, 0.22);
+  color: #fef08a;
+}
+
+.stack-pill-btn.receiver {
+  background: rgba(45, 35, 15, 0.78);
+  border-color: rgba(250, 204, 21, 0.65);
+}
+
+.stack-pill-btn.active {
+  background: rgba(0, 229, 255, 0.32);
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.75);
+}
+
+.stack-pill-btn.receiver.active {
+  background: rgba(250, 204, 21, 0.35);
+  border-color: #fef08a;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.75);
+}
+
+.stack-mid-label {
+  font-size: 0.64rem;
+  color: #cbd5e1;
+  text-align: center;
+  margin-bottom: 0.18rem;
+  padding: 0.22rem 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 0.25rem;
+}
+
+.flow-arrow-down {
+  color: var(--cyan-bright);
+  font-weight: 900;
+  display: inline-block;
+  animation: animFlowDown 1.1s infinite ease-in-out;
+}
+
+.flow-arrow-up {
+  color: #facc15;
+  font-weight: 900;
+  display: inline-block;
+  animation: animFlowUp 1.1s infinite ease-in-out;
+}
+
+@keyframes animFlowDown {
+  0%, 100% { transform: translateY(-2px); opacity: 0.55; }
+  50% { transform: translateY(2px); opacity: 1; }
+}
+
+@keyframes animFlowUp {
+  0%, 100% { transform: translateY(2px); opacity: 0.55; }
+  50% { transform: translateY(-2px); opacity: 1; }
+}
+
+.xray-SubBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.7rem;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+  background: rgba(4, 14, 28, 0.85);
+  gap: 0.5rem;
+}
+
+.xray-progress-track {
+  flex: 1;
+  height: 12px;
+  background: rgba(8, 28, 52, 0.9);
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.xray-progress-fill {
+  height: 100%;
+  width: 45%;
+  background: linear-gradient(90deg, rgba(0, 229, 255, 0.3), #00e5ff);
+  box-shadow: 0 0 10px var(--cyan);
+  transition: width 0.25s ease;
+}
+
+.xray-scenario-select {
+  padding: 0.22rem 0.6rem;
+  background: rgba(8, 28, 52, 0.95);
+  border: 1.5px solid var(--cyan);
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.xray-scenario-select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.xray-body-grid {
+  display: grid;
+  grid-template-columns: 44% 54.5%;
+  flex: 1;
+  padding: 0.5rem 0.7rem;
+  gap: 1.5%;
+  align-items: center;
+  overflow: hidden;
+}
+
+.handshake-diagram-box {
+  background: rgba(5, 16, 32, 0.82);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.42rem;
+}
+
+.xray-info-pill {
+  padding: 0.38rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(8, 30, 56, 0.85);
+  border: 1.5px solid var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.38rem;
+}
+
+.xray-ip-card {
+  padding: 0.38rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(6, 18, 36, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  font-size: 0.73rem;
+  margin-bottom: 0.35rem;
+}
+
+/* ==========================================================================
+   SCENE 3: UJIAN KADET
+   ========================================================================== */
+.s3-status-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1120px;
+  margin: 0 auto 0.5rem;
+  padding: 0.42rem 1.2rem;
+  background: rgba(6, 22, 43, 0.92);
+  border: 1.5px solid rgba(0, 229, 255, 0.65);
+  border-radius: 8px;
+}
+
+.s3-center-medal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #facc15 0%, #854d0e 100%);
+  border: 2px solid #fef08a;
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.65);
+  display: grid;
+  place-items: center;
+}
+
+.s3-arena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.s3-action-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  max-width: 820px;
+  width: 100%;
+  margin: 0.55rem auto 0;
+}
+
+.s3-action-btn {
+  padding: 0.6rem 1.45rem;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 170px;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.s3-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.s3-action-btn:active {
+  transform: translateY(1px);
+}
+
+/* Tombol Periksa Jawaban (Konsisten dengan style tombol PERBAIKAN) */
+.s3-btn-check {
+  background: linear-gradient(90deg, #00d2ff 0%, #00f2fe 100%);
+  color: #020814;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.65);
+}
+
+.s3-btn-check:hover {
+  box-shadow: 0 0 28px rgba(0, 229, 255, 0.95);
+  filter: brightness(1.08);
+}
+
+/* Tombol Acak Soal (Cyberpunk Dark Navy / Cyan Accent) */
+.s3-btn-reset {
+  background: linear-gradient(90deg, #072a4a 0%, #0c3d69 100%);
+  border: 1.5px solid rgba(0, 229, 255, 0.75);
+  color: #e0f2fe;
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.28);
+}
+
+.s3-btn-reset:hover {
+  background: linear-gradient(90deg, #0a3a66 0%, #0f4f88 100%);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(0, 229, 255, 0.6);
+}
+
+/* Tombol Lanjut ke Investigasi (Konsisten dengan tombol MASUK KE RUANG DETEKTIF LEGENDARIS) */
+.s3-btn-investigate {
+  background: linear-gradient(90deg, #facc15 0%, #eab308 100%);
+  color: #020814;
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.75);
+}
+
+.s3-btn-investigate:hover {
+  box-shadow: 0 0 28px rgba(250, 204, 21, 0.95);
+  filter: brightness(1.08);
+}
+
+.motherboard-rack {
+  background: rgba(8, 20, 38, 0.94);
+  border: 2px solid rgba(100, 146, 180, 0.55);
+  border-radius: 10px;
+  padding: 0.5rem 0.85rem;
+  max-width: 820px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mb-header-row {
+  display: grid;
+  grid-template-columns: 145px 125px 1fr 135px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.22rem 0.35rem 0.35rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.35);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--cyan-bright);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mb-row {
+  display: grid;
+  grid-template-columns: 145px 1fr 135px;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.28rem;
+}
+
+.mb-layer-box {
+  padding: 0.28rem 0.55rem;
+  background: rgba(18, 35, 58, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 5px;
+  font-size: 0.73rem;
+  line-height: 1.15;
+}
+
+.mb-callout-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0.4rem;
+  padding: 0.26rem 0.48rem;
+  background: rgba(10, 28, 52, 0.92);
+  border: 1.5px solid var(--cyan);
+  border-radius: 6px;
+}
+
+.mb-row.correct .mb-callout-card { border-color: #4ade80; }
+.mb-row.wrong .mb-callout-card { border-color: var(--red); }
+
+.mb-answer-status {
+  height: 36px;
+  background: rgba(6, 15, 28, 0.95);
+  border: 1.5px dashed rgba(148, 163, 184, 0.45);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  font-weight: 800;
+  color: #94a3b8;
+  padding: 0 0.4rem;
+  text-align: center;
+}
+
+.mb-row.correct .mb-answer-status {
+  border-style: solid;
+  border-color: #4ade80;
+  background: rgba(20, 83, 45, 0.45);
+  color: #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.28);
+}
+
+.mb-row.wrong .mb-answer-status {
+  border-style: solid;
+  border-color: var(--red);
+  background: rgba(127, 29, 29, 0.45);
+  color: #fca5a5;
+  box-shadow: 0 0 10px rgba(248, 113, 113, 0.28);
+}
+
+.mb-select {
+  background: rgba(4, 12, 24, 0.92);
+  color: #ffffff;
+  border: 1px solid rgba(0, 229, 255, 0.38);
+  border-radius: 4px;
+  padding: 0.22rem 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   SCENE 4: MEJA INVESTIGASI KASUS
+   ========================================================================== */
+.s4-three-windows {
+  display: grid;
+  grid-template-columns: 29% 39% 29%;
+  gap: 1.5%;
+  height: 100%;
+  align-items: start;
+}
+
+.dossier-card-img {
+  width: 100%;
+  height: 185px;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+
+.radio-hint-panel {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.45rem;
+  padding: 0.45rem 0.65rem;
+  background: rgba(6, 20, 40, 0.92);
+  border: 1.5px solid var(--cyan);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.walkie-icon-box {
+  width: 40px;
+  height: 44px;
+  border-radius: 6px;
+  border: 1.5px solid var(--cyan);
+  background: rgba(0, 229, 255, 0.12);
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.diag-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.3rem;
+}
+
+.diag-layer-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  text-align: right;
+}
+
+.diag-pill-btn {
+  width: 100%;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(10, 38, 66, 0.85);
+  border: 1.5px solid rgba(0, 229, 255, 0.65);
+  color: #e0f2fe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.diag-pill-btn.selected-scan {
+  background: rgba(0, 229, 255, 0.28);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.65);
+}
+
+.diag-pill-btn.fixed-green {
+  background: rgba(20, 83, 45, 0.8);
+  border-color: var(--green);
+  color: #dcfce7;
+}
+
+.red-alert-popup {
+  margin-top: 0.35rem;
+  background: linear-gradient(180deg, rgba(8, 28, 52, 0.95), rgba(4, 15, 30, 0.96));
+  border: 1.5px solid var(--cyan);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  text-align: center;
+}
+
+.rj45-visual-stage {
+  position: relative;
+  width: 100%;
+  height: 195px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  margin-bottom: 0.45rem;
+}
+
+.rj45-visual-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rj45-bits-overlay {
+  position: absolute;
+  top: 26%;
+  left: 14%;
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 0.98rem;
+  color: var(--green);
+  background: rgba(2, 12, 24, 0.78);
+  padding: 0.12rem 0.38rem;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   SCENE 5: UPACARA PELANTIKAN
+   ========================================================================== */
+.s5-cert-wrapper {
+  position: absolute;
+  right: 8%;
+  top: 42%;
+  transform: translateY(-50%);
+  width: min(670px, 55vw);
+  z-index: 30;
+  text-align: center;
+}
+
+.s5-cert-frame {
+  position: relative;
+  background: radial-gradient(circle at center, rgba(12, 34, 62, 0.94) 0%, rgba(5, 15, 30, 0.97) 100%);
+  border: 3px double var(--cyan);
+  outline: 2px solid rgba(0, 229, 255, 0.45);
+  outline-offset: -10px;
+  border-radius: 10px;
+  padding: 2.8rem 1.8rem 1.2rem;
+  box-shadow: 0 0 38px rgba(0, 229, 255, 0.35), 0 0 60px rgba(250, 204, 21, 0.15);
+}
+
+.s5-top-badge {
+  position: absolute;
+  top: -44px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88px;
+  height: 98px;
+  object-fit: contain;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 16px rgba(250, 204, 21, 0.8));
+}
+
+.s5-print-btn {
+  margin-top: 0.8rem;
+  padding: 0.65rem 2rem;
+  background: linear-gradient(180deg, #fde047 0%, #ca8a04 100%);
+  border: 2px solid var(--cyan-bright);
+  border-radius: 8px;
+  color: #090d16;
+  font-size: 0.92rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+/* Modal Dialogs */
+dialog.cyber-dialog {
+  margin: auto;
+  max-width: 680px;
+  width: 92%;
+  background: #071326;
+  color: var(--text-white);
+  border: 2px solid var(--cyan);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+}
+
+dialog.cyber-dialog::backdrop {
+  background-color: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(4px);
+}
+
+.header-anatomy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+
+.header-anatomy-table th,
+.header-anatomy-table td {
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 0.38rem 0.55rem;
+  text-align: left;
+}
+
+.header-anatomy-table th {
+  background: rgba(2, 132, 199, 0.25);
+  color: var(--cyan-bright);
+}
+
+/* Print Certificate Mode */
+@media print {
+  html, body {
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+  #bg3dCanvas,
+  .top-game-bar,
+  .consistent-fg-dock,
+  .no-print {
+    display: none !important;
+  }
+  .s5-cert-wrapper {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    margin: 2rem auto !important;
+  }
+  .s5-cert-frame {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 4px double #1e3a8a !important;
+    box-shadow: none !important;
+  }
+}

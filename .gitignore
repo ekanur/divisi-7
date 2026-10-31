@@ -1,0 +1,13 @@
+# OS & System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node / Dependencies (if any)
+node_modules/
+package-lock.json
+
+# Logs & Temp
+*.log
+*.tmp
+.cache/
