@@ -121,14 +121,6 @@ html, body {
   white-space: nowrap;
 }
 
-.sb-scene-subtitle {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--cyan-bright);
-  letter-spacing: 0.03em;
-  white-space: nowrap;
-}
-
 /* Consistent Top Scene Navigation Buttons (Locked to Center in all scenes) */
 .top-nav-cluster {
   position: absolute;
@@ -399,22 +391,6 @@ body[data-active-scene="5"] #btnOpenTeacher {
   object-position: bottom center;
 }
 
-.fg-replay-hint-pill {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.18rem 0.55rem;
-  border-radius: 999px;
-  background: rgba(4, 15, 30, 0.92);
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  font-size: 0.66rem;
-  font-weight: 800;
-  white-space: nowrap;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
-
 .sb-dialog-container {
   pointer-events: auto;
   margin-bottom: 12px;
@@ -495,18 +471,6 @@ body[data-active-scene="5"] #btnOpenTeacher {
 /* ==========================================================================
    SCENE 1: REGISTRASI
    ========================================================================== */
-.s1-globe-wrapper {
-  position: absolute;
-  left: 44%;
-  top: 41%;
-  transform: translate(-50%, -50%);
-  width: min(470px, 38vw);
-  height: min(450px, 68vh);
-  z-index: 15;
-  display: grid;
-  place-items: center;
-}
-
 .s1-reg-window {
   position: absolute;
   right: 3%;
