@@ -52,11 +52,11 @@ Game ini terbagi menjadi 5 ruang (*scene*) terintegrasi:
 
 1. Clone repositori ini:
    ```bash
-   git clone https://github.com/ekanur/divisi_7.git
+   git clone https://github.com/ekanur/divisi-7.git
    ```
 2. Buka folder proyek:
    ```bash
-   cd divisi_7
+   cd divisi-7
    ```
 3. Buka file `index.html` langsung di browser modern (Google Chrome, Microsoft Edge, Mozilla Firefox) atau gunakan ekstensi *Live Server* pada VS Code.
 
