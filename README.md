@@ -1,5 +1,7 @@
 # 🕵️‍♂️ DIVISI 7 : Markas Investigasi Paket
-> **Media Pembelajaran Interaktif 7 Lapisan OSI (Open Systems Interconnection)**
+> **Media Pembelajaran Interaktif: 7 Lapisan OSI (Open Systems Interconnection)**
+
+![Sampul Media Pembelajaran: 7 Lapisan OSI](cover.png)
 
 ---
 
